@@ -64,6 +64,7 @@ table.summary td, table.summary th {
     padding: 8px;
     text-align: left;
     min-width: 120px;
+    font-size: 14px;
 }
 
 table.summary tr td:first-child {
@@ -90,11 +91,12 @@ table.summary .total-in-words {
 
 .heading {
     /*font-family: 'Rubik', sans-serif;*/
-    font-size: 18px;
+    font-size: 16px;
     /*padding-bottom: 8px;*/
     font-weight: bold;
     margin: 36px 0 8px;
 }
+
 
 .b-0 {
     border: none;
@@ -135,11 +137,17 @@ table.summary .total-in-words {
 }
 
 .container{
-    /*min-width: 1280px;*/
+    max-width: 996px;
+    padding: 20px 40px;
 }
 
 .card{
     background-color: white;
+}
+
+.banner svg{
+    height: 32px;
+    /*margin-right: 12px;*/
 }
 
 .main-area{
@@ -150,12 +158,13 @@ table.summary .total-in-words {
     display: block;
 }
 .main-area-header h4{
-    font-size: 32px;
+    font-size: 28px;
     font-weight: normal;
     margin:0;
     padding:0;
 }
 .main-area-header .date{
+    font-size: 14px;
     padding:0;
     text-transform: capitalize
 }
@@ -163,10 +172,40 @@ table.summary .total-in-words {
     color:red;
 }
 
+div.details{
+    font-size: 14px;
+}
+
 .account-details{
     display: flex;
     align-items: center;
     margin-bottom: 24px;
+}
+
+.account-details-image{
+    width: 70px
+}
+
+.account-details-image img{
+    width: 55px
+}
+.account-details .number{
+    font-size: 24px;
+    font-weight: normal
+}
+
+
+
+.account-details .bank-info{
+    font-size: 12px;
+}
+
+.account-details .branch{
+    font-size: 14px;
+}
+
+.signature{
+    font-size: 14px;
 }
 
 .md-hide{
@@ -178,7 +217,87 @@ table.summary .total-in-words {
     display: none;
 }
 
+.footer{
+    margin-bottom: 80px;
+}
+
+.download{
+    /*margin: 36px auto;*/
+    display: flex;
+    justify-content: center;
+}
+.download a{
+    text-decoration: none;
+    padding: 12px 24px;
+    background-color: #20ae50;
+    color: white;
+
+}
+
+.download a svg{
+    height: 24px;
+    color: white;
+}
+
 @media (min-width: 768px) {
+    .main-area-header{
+        margin: 30px 0;
+        display: block;
+    }
+    .main-area-header h4{
+        font-size: 32px;
+    }
+    .main-area-header .date{
+        font-size: 16px;
+    }
+    .main-area-header h4 span{
+        color:red;
+    }
+
+    .heading {
+        font-size: 18px;
+        margin: 36px 0 8px;
+    }
+
+
+    div.details{
+        font-size: 16px;
+    }
+
+    table.summary td, table.summary th {
+        font-size: 16px;
+    }
+
+    .account-details{
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+    .account-details-image{
+        width: 75px
+    }
+
+    .account-details-image img{
+        width: 60px
+    }
+
+    .account-details .number{
+        font-size: 26px;
+    }
+
+    .account-details .bank-info{
+        font-size: 14px;
+    }
+
+    .account-details .branch{
+        font-size: 16px;
+    }
+
+    .signature{
+        font-size: 16px;
+    }
+
     .md-hide{
         display: none;
     }

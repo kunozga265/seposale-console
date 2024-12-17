@@ -3,10 +3,31 @@
     <x-slot name="title">
         Quotation
     </x-slot>
+    <div class="banner mt-24">
+
+        <img class="md-show" style="width: 100%" src="{{asset("/images/banner.png")}}" alt="">
+
+        <div class="md-hide" style="margin: 48px 0">
+            <div class=" d-flex justify-content-between align-items-center">
+                <img class="" style="height: 60px;" src="{{asset("/images/logo.png")}}" alt="">
+
+                <div class="download">
+                    <a href="{{route('quotations.download', ['client_serial'=>$quotation->client->serial, 'quotation_serial' => $quotation->serial])}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="white" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                        </svg>
+                    </a>
+                </div>
+                {{--                <a href="#">--}}
+                {{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">--}}
+                {{--                        <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>--}}
+                {{--                    </svg>--}}
+                {{--                </a>--}}
+            </div>
+        </div>
+    </div>
 
 
-    <img class="md-show" style="width: 100%" src="{{asset("/images/banner.png")}}" alt="">
-    <img class="md-hide" style="height: 80px; margin: 48px 0" src="{{asset("/images/logo.png")}}" alt="">
     <div class="main-area">
         <div class="main-area-header">
             <h4>Quotation: <span>#{{$code}}</span></h4>
@@ -96,33 +117,47 @@
             </table>
         </div>
 
-        <div class="mt-36 mb-36">
+        <div class="signature mt-36 mb-36">
             <div>Prepared By</div>
             <div class="font-bold">{{$quotation->user->fullName()}}</div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md-6 account-details">
-                <div class="" style="width: 75px">
-                    <img style="width: 60px" src="{{asset("/images/nb.png")}}" alt="">
+                <div class="account-details-image">
+                    <img src="{{asset("/images/nb.png")}}" alt="">
                 </div>
                 <div class="b-0">
-                    <div style="font-size: 14px">National Bank Account Number</div>
-                    <div style="font-size: 28px; font-weight: normal">1008405545</div>
-                    <div style="font-size: 16px">Gateway Mall Branch</div>
+                    <div class="bank-info">National Bank Account Number</div>
+                    <div class="number">1008405545</div>
+                    <div class="branch">Gateway Mall Branch</div>
                 </div>
             </div>
             <div class="col-12 col-md-6 account-details">
-                <div class="b-0" style="width: 75px">
-                    <img style="width: 60px" src="{{asset("/images/std.png")}}" alt="">
+                <div class="account-details-image">
+                    <img src="{{asset("/images/std.png")}}" alt="">
                 </div>
                 <div class="b-0">
-                    <div style="font-size: 14px">Standard Bank Account Number</div>
-                    <div style="font-size: 28px; font-weight: normal">9100006110794</div>
-                    <div style="font-size: 16px">Gateway Mall Branch</div>
+                    <div class="bank-info">Standard Bank Account Number</div>
+                    <div class="number">9100006110794</div>
+                    <div class="branch">Gateway Mall Branch</div>
                 </div>
             </div>
         </div>
+
+
+        <div class="md-show">
+            <div class="mt-36 mb-36 download">
+                <a href="{{route('quotations.download', ['client_serial'=>$quotation->client->serial, 'quotation_serial' => $quotation->serial])}}">
+                    <span>Download</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="white" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer"></div>
 
 
     </div>
