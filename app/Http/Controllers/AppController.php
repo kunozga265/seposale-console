@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Rmunate\Utilities\SpellNumber;
 
 class AppController extends Controller
 {
+    public function getAmountInWords($number)
+    {
+        $in_words = SpellNumber::value($number)
+            ->locale('en')
+            ->currency('Kwacha')
+            ->fraction('Tambala')
+            ->toMoney();
+
+        return str_replace(" of "," ",$in_words);
+    }
+
     public function getZeroedNumber($number, $revision = 0)
     {
         $zeroed_number = '';

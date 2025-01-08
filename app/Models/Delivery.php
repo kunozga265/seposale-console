@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AppController;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,11 @@ class Delivery extends Model
         $now = Carbon::now();
         $overdue = $now->diff($due_date);
         return $overdue->invert == 1;
+    }
+
+    public function formattedCode()
+    {
+        return (new AppController())->getZeroedNumber($this->code);
     }
 
     protected $fillable = [

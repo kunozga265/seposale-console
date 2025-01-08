@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AppController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,16 @@ class Quotation extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function formattedCode()
+    {
+        return (new AppController())->getZeroedNumber($this->code);
+    }
+
+    public function totalInWords()
+    {
+        return (new AppController())->getAmountInWords($this->total);
     }
 
     protected $fillable = [

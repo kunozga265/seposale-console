@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AppController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +40,20 @@ class Collection extends Model
         return $this->hasMany(SystemLog::class);
     }
 
+    public function formattedCode()
+    {
+        return (new AppController())->getZeroedNumber($this->code);
+    }
+
+    public function collectedBy()
+    {
+        if($this->collected_by != null){
+            $phone_number = $this->collected_by_phone_number != null ? "({$this->collected_by_phone_number})" : "";
+            return "{$this->collected_by} {$phone_number}";
+        }else{
+            return "Self";
+        }
+    }
 
     protected $fillable= [
         "code",

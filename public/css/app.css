@@ -226,7 +226,7 @@ div.details{
     display: flex;
     justify-content: center;
 }
-.download a{
+.download a, .download button{
     text-decoration: none;
     padding: 12px 24px;
     background-color: #20ae50;
@@ -234,10 +234,40 @@ div.details{
 
 }
 
-.download a svg{
+.download a svg, .btn svg{
     height: 24px;
     color: white;
 }
+
+#products{
+    width: 100%;
+    margin: 48px 0;
+}
+
+#products div.info{
+    border-bottom: 1px solid black;
+    font-size: 14px;
+}
+
+.product-description {
+    margin-top: 48px;
+    margin-bottom: 24px;
+}
+
+.product-description .title{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.product-description .subtitle{
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+
+
+
 
 @media (min-width: 768px) {
     .main-area-header{
@@ -309,8 +339,18 @@ div.details{
         justify-content: space-between;
         align-items: center;
     }
+
+    #products{
+        margin: 60px 0;
+    }
+
+    #products div.info{
+        font-size: 16px;
+
+    }
 }
 
 @media (min-width: 992px) {
 
 }
+

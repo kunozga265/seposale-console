@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <x-slot name="title">
-        Quotation
+        Quotation #{{$quotation->formattedCode()}} | {{$quotation->client->name}}
     </x-slot>
     <div class="banner mt-24">
 
@@ -30,8 +30,8 @@
 
     <div class="main-area">
         <div class="main-area-header">
-            <h4>Quotation: <span>#{{$code}}</span></h4>
-            <div class="date">{{$date}}</div>
+            <h4>Quotation: <span>#{{$quotation->formattedCode()}}</span></h4>
+            <div class="date">{{date('F j, Y',$quotation->created_at->getTimestamp())}}</div>
         </div>
 
 
@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td colspan="5" class="total-in-words">
-                        {{$total_in_words}} Only
+                        {{$quotation->totalInWords()}} Only
                     </td>
                 </tr>
                 </tbody>

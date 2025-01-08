@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{"QUOTATION#".$quotation->formattedCode()." - ".$quotation->client->name}}</title>
+    <title>{{"SALE#".$sale->formattedCode()." - ".$sale->client->name}}</title>
 
     <style>
         * {
@@ -17,25 +17,29 @@
         /*@font-face {*/
         /*    font-family: 'Exo Font';*/
         /*    font-weight: bold;*/
-        /*    src: url({{storage_path()."/fonts/Exo2-Bold.ttf"}}) format("ttf");*/
+        /*    src: url(
+        {{storage_path()."/fonts/Exo2-Bold.ttf"}} ) format("ttf");*/
         /*}*/
 
         /*@font-face {*/
         /*    font-family: 'Rubik';*/
         /*    font-weight: bold;*/
-        /*    src: url({{asset("/fonts/Rubik-Bold.ttf")}}) format("ttf");*/
+        /*    src: url(
+        {{asset("/fonts/Rubik-Bold.ttf")}} ) format("ttf");*/
         /*}*/
 
         /*@font-face {*/
         /*    font-family: 'Inter';*/
         /*    font-weight: normal;*/
-        /*    src: url({{asset("/fonts/Inter-Regular.ttf")}}) format("ttf");*/
+        /*    src: url(
+        {{asset("/fonts/Inter-Regular.ttf")}} ) format("ttf");*/
         /*}*/
 
         /*@font-face {*/
         /*    font-family: 'Inter';*/
         /*    font-weight: bold;*/
-        /*    src: url({{asset("/fonts/Inter-Bold.ttf")}}) format("ttf");*/
+        /*    src: url(
+        {{asset("/fonts/Inter-Bold.ttf")}} ) format("ttf");*/
         /*}*/
 
         td, th {
@@ -45,7 +49,7 @@
         }
 
         table {
-            margin: 12px 0;
+            /*margin: 12px 0;*/
             width: 100%;
             border-collapse: collapse;
             /*font-size: 14px;*/
@@ -106,7 +110,7 @@
             font-size: 14px;
             /*padding-bottom: 8px;*/
             font-weight: bold;
-            margin: 36px 0 0px;
+            margin: 24px 0 8px;
         }
 
 
@@ -114,27 +118,27 @@
             border: none;
         }
 
-        .mt-24{
+        .mt-24 {
             margin-top: 24px
         }
 
-        .mt-36{
+        .mt-36 {
             margin-top: 36px
         }
 
-        .mt-48{
+        .mt-48 {
             margin-top: 48px
         }
 
-        .mb-24{
+        .mb-24 {
             margin-bottom: 24px
         }
 
-        .mb-36{
+        .mb-36 {
             margin-bottom: 36px
         }
 
-        .mb-48{
+        .mb-48 {
             margin-bottom: 48px
         }
 
@@ -142,100 +146,99 @@
             font-weight: bold;
         }
 
-        .shadow-xl {
-            --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);
-            --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-        }
-
-        .container{
+        .container {
             max-width: 996px;
             padding: 20px 40px;
         }
 
-        .card{
+        .card {
             background-color: white;
         }
 
-        .banner svg{
+        .banner svg {
             height: 32px;
             /*margin-right: 12px;*/
         }
 
-        .main-area{
+        .main-area {
             padding: 0 20px;
         }
-        .main-area-header{
+
+        .main-area-header {
             margin: 30px 0;
             display: block;
         }
-        .main-area-header h4{
+
+        .main-area-header h4 {
             font-size: 25px;
             font-weight: normal;
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
         }
-        .main-area-header .date{
+
+        .main-area-header .date {
             font-size: 12px;
-            padding:0;
+            padding: 0;
             text-transform: capitalize
         }
-        .main-area-header h4 span{
-            color:red;
+
+        .main-area-header h4 span {
+            color: red;
         }
 
 
-        .account-details{
+        .account-details {
             display: flex;
             align-items: center;
             margin-bottom: 24px;
         }
 
-        .account-details-image{
+        .account-details-image {
             width: 50px
         }
 
-        .account-details-image img{
+        .account-details-image img {
             width: 45px
         }
-        .account-details .number{
+
+        .account-details .number {
             font-size: 20px;
             font-weight: normal
         }
 
 
-
-        .account-details .bank-info{
+        .account-details .bank-info {
             font-size: 11px;
         }
 
-        .account-details .branch{
+        .account-details .branch {
             font-size: 12px;
         }
 
-        .signature{
+        .signature {
             font-size: 12px;
         }
 
-        .md-hide{
+        .md-hide {
             display: block;
         }
 
 
-        .md-show{
+        .md-show {
             display: none;
         }
 
-        .footer{
+        .footer {
             margin-bottom: 80px;
         }
 
-        .download{
+        .download {
             /*margin: 36px auto;*/
             display: flex;
             justify-content: center;
         }
-        .download a{
+
+        .download a {
             text-decoration: none;
             padding: 12px 24px;
             background-color: #20ae50;
@@ -243,24 +246,27 @@
 
         }
 
-        .download a svg{
+        .download a svg {
             height: 24px;
             color: white;
         }
 
         @media (min-width: 768px) {
-            .main-area-header{
+            .main-area-header {
                 margin: 30px 0;
                 display: block;
             }
-            .main-area-header h4{
+
+            .main-area-header h4 {
                 font-size: 32px;
             }
-            .main-area-header .date{
+
+            .main-area-header .date {
                 font-size: 16px;
             }
-            .main-area-header h4 span{
-                color:red;
+
+            .main-area-header h4 span {
+                color: red;
             }
 
             .heading {
@@ -269,7 +275,7 @@
             }
 
 
-            div.details{
+            div.details {
                 font-size: 16px;
             }
 
@@ -277,21 +283,22 @@
                 font-size: 16px;
             }
 
-            .account-details{
+            .account-details {
                 display: flex;
                 align-items: center;
                 margin-bottom: 24px;
             }
 
 
-
-            .md-hide{
+            .md-hide {
                 display: none;
             }
-            .md-show{
+
+            .md-show {
                 display: block;
             }
-            .main-area-header{
+
+            .main-area-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -307,8 +314,6 @@
 <body>
 
 
-
-
 <div class="main-area">
     <div class="banner mt-24">
 
@@ -316,53 +321,52 @@
     </div>
 
     <div class="main-area-header">
-        <div style="float: right" class="date">{{date('F j, Y',$quotation->created_at->getTimestamp())}}</div>
-        <h4>Quotation: <span>#{{$quotation->formattedCode()}}</span></h4>
+        <div style="float: right" class="date">{{date('F j, Y',$sale->date)}}</div>
+        <h4>Sales Order: <span>#{{$sale->formattedCode()}}</span></h4>
     </div>
 
 
-    <p class="heading">Customer Details</p>
+    <p class="heading" style="margin-bottom: 0">Customer Details</p>
     <table class="details">
         <tr>
             <td class="b-0">Name:</td>
-            <td class="b-0">{{$quotation->client->name}}</td>
+            <td class="b-0">{{$sale->client->name}}</td>
         </tr>
-        @if(isset($quotation->client->phone_number))
+        @if(isset($sale->client->phone_number))
             <tr>
                 <td class="b-0">Phone Number:</td>
-                <td class="b-0">{{$quotation->client->phone_number}}</td>
+                <td class="b-0">{{$sale->client->phone_number}}</td>
 
             </tr>
         @endif
-        @if(isset($quotation->client->email))
+        @if(isset($sale->client->email))
             <tr>
                 <td class="b-0">Email:</td>
-                <td class="b-0" style="text-transform: lowercase">{{$quotation->client->email}}</td>
+                <td class="b-0" style="text-transform: lowercase">{{$sale->client->email}}</td>
             </tr>
         @endif
-        @if(isset($quotation->client->address))
+        @if(isset($sale->client->address))
             <tr>
                 <td class="b-0">Address:</td>
-                <td class="b-0">{{$quotation->client->address}}</td>
+                <td class="b-0">{{$sale->client->address}}</td>
             </tr>
         @endif
         <tr>
             <td class="b-0">Site Location:</td>
-            <td class="b-0">{{$quotation->location}}</td>
+            <td class="b-0">{{$sale->location}}</td>
         </tr>
-        {{--            @if(isset($quotation->recipient_name))--}}
-        {{--                <div class="row">--}}
-
-        {{--                    <div class="col-12 col-md-3 md-show">Contact Name:</div>--}}
-        {{--                    <div class="col-12 col-md-9">{{$quotation->recipient_name}}</div>--}}
-        {{--                </div>--}}
-        {{--            @endif--}}
-        {{--            @if(isset($quotation->recipient_phone_number))--}}
-        {{--                <div class="row">--}}
-        {{--                    <div class="col-12 col-md-3 md-show">Contact Number:</div>--}}
-        {{--                    <div class="col-12 col-md-9">{{$quotation->recipient_phone_number}}</div>--}}
-        {{--                </div>--}}
-        {{--            @endif--}}
+        @if(isset($sale->recipient_name))
+            <tr>
+                <td class="b-0">Contact Name:</td>
+                <td class="b-0">{{$sale->recipient_name}}</td>
+            </tr>
+        @endif
+        @if(isset($sale->recipient_phone_number))
+            <tr>
+                <td class="b-0">Contact Number:</td>
+                <td class="b-0">{{$sale->recipient_phone_number}}</td>
+            </tr>
+        @endif
 
 
     </table>
@@ -381,58 +385,57 @@
             </tr>
             </thead>
             <tbody>
-            @foreach(json_decode($quotation->information) as $info)
+            @foreach($sale->products as $productCompound)
                 <tr>
-                    <td style="text-transform: none">{{$info->details}}</td>
-                    <td style="text-align: center">{{$info->units ?? ""}}</td>
-                    <td style="text-align: center">{{number_format($info->quantity,2)}}</td>
-                    <td style="text-align: right">{{number_format($info->unitCost,2)}}</td>
-                    <td style="text-align: right">{{number_format($info->totalCost,2)}}</td>
+                    <td style="text-transform: none">{{$productCompound->description}}</td>
+                    <td style="text-align: center">{{$productCompound->units}}</td>
+                    <td style="text-align: center">{{number_format($productCompound->quantity,2)}}</td>
+                    <td style="text-align: right">{{number_format($productCompound->amount/$productCompound->quantity,2)}}</td>
+                    <td style="text-align: right">{{number_format($productCompound->amount,2)}}</td>
                 </tr>
             @endforeach
             <tr class="total">
                 <td colspan="4">Total</td>
-                <td>{{number_format($quotation->total,2)}}</td>
+                <td>{{number_format($sale->total,2)}}</td>
             </tr>
             <tr>
                 <td colspan="5" class="total-in-words">
-                    {{$quotation->totalInWords()}} Only
+                    {{$sale->totalInWords()}} Only
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="signature mt-24">
-        <div>Prepared By</div>
-        <div class="font-bold">{{$quotation->user->fullName()}}</div>
+{{--    <div class="signature mt-24">--}}
+{{--        <div>Prepared By</div>--}}
+{{--        <div class="font-bold">{{$sale->user->fullName()}}</div>--}}
+{{--    </div>--}}
+
+    <div class="account-details mt-24">
+        <table>
+            <tr>
+                <td class="b-0 account-details-image">
+                    <img src="{{storage_path()."/images/nb.png"}}" alt="">
+                </td>
+                <td class="b-0">
+                    <div class="bank-info">National Bank Account Number</div>
+                    <div class="number">1008405545</div>
+                    <div class="branch">Gateway Mall Branch</div>
+                </td>
+
+                <td class="b-0 account-details-image">
+                    <img src="{{storage_path()."/images/std.png"}}" alt="">
+                </td>
+                <td class="b-0">
+                    <div class="bank-info">Standard Bank Account Number</div>
+                    <div class="number">9100006110794</div>
+                    <div class="branch">Gateway Mall Branch</div>
+                </td>
+            </tr>
+        </table>
+
     </div>
-
-    <div class="account-details">
-    <table >
-        <tr >
-            <td class="b-0 account-details-image">
-                <img src="{{storage_path()."/images/nb.png"}}" alt="">
-            </td>
-            <td class="b-0">
-                <div class="bank-info">National Bank Account Number</div>
-                <div class="number">1008405545</div>
-                <div class="branch">Gateway Mall Branch</div>
-            </td>
-
-            <td class="b-0 account-details-image">
-                <img src="{{storage_path()."/images/std.png"}}" alt="">
-            </td>
-            <td class="b-0">
-                <div class="bank-info">Standard Bank Account Number</div>
-                <div class="number">9100006110794</div>
-                <div class="branch">Gateway Mall Branch</div>
-            </td>
-        </tr>
-    </table>
-
-    </div>
-
 
 
 </div>

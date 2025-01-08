@@ -23,6 +23,10 @@ class Client extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+    public function receipts()
+    {
+        return $this->hasMany(Receipt::class);
+    }
 
     protected $fillable = [
         'name',

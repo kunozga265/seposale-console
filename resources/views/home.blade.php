@@ -1,9 +1,9 @@
 <x-app-layout>
 
     <x-slot name="title">
-        Home
+        Seposale Limited
     </x-slot>
 
-   Home
+
 
 </x-app-layout>

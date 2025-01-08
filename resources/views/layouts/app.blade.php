@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Seposale') }} - {{$title}}</title>
+        <title>{{$title}}</title>
 
 {{--        <link--}}
 {{--            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Teko:wght@300;400;500;600;700&amp;display=swap"--}}
@@ -32,8 +32,8 @@
         <!-- Color css -->
         <link rel="stylesheet" id="jssDefault" href="{{asset('css/colors/color-default.css')}}">
 
-        <link rel="shortcut icon" href="images/favicon.png" id="fav-shortcut" type="image/x-icon">
-        <link rel="icon" href="images/favicon.png" id="fav-icon" type="image/x-icon">
+        <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" id="fav-shortcut" type="image/x-icon">
+        <link rel="icon" href="{{asset('images/favicon.png')}}" id="fav-icon" type="image/x-icon">
 
         <!-- Responsive Settings -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

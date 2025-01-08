@@ -24,23 +24,8 @@ class QuotationController extends Controller
 
             if (is_object($quotation)) {
 
-                $now_d = Carbon::now('Africa/Lusaka')->format('F j, Y');
-                $now_t = Carbon::now('Africa/Lusaka')->format('H:i');
-
-                $total_in_words = SpellNumber::value($quotation->total)
-                    ->locale('en')
-                    ->currency('Kwacha')
-                    ->fraction('Tambala')
-                    ->toMoney();
-
-                str_replace($total_in_words, " and ", " of ");
-
                 return view('pages.quotation', [
-                    'code' => (new AppController())->getZeroedNumber($quotation->code),
-                    'date' => $now_d,
-                    'time' => $now_t,
                     'quotation' => $quotation,
-                    'total_in_words' => $total_in_words,
                 ]);
             } else {
                 return Redirect::route('home')->with('error', 'Quotation was not found');
@@ -63,25 +48,10 @@ class QuotationController extends Controller
 
             if (is_object($quotation)) {
 
-                $now_d = Carbon::now('Africa/Lusaka')->format('F j, Y');
-                $now_t = Carbon::now('Africa/Lusaka')->format('H:i');
-
-                $total_in_words = SpellNumber::value($quotation->total)
-                    ->locale('en')
-                    ->currency('Kwacha')
-                    ->fraction('Tambala')
-                    ->toMoney();
-
-                str_replace($total_in_words, " and ", " of ");
-
-                $filename="QUOTATION#".(new AppController())->getZeroedNumber($quotation->code)." - ".$quotation->client->name."-".date('Ymd');
+                $filename="QUOTATION#".$quotation->formattedCode()." - ".$quotation->client->name."-".date('Ymd');
 
                 $pdf = PDF::loadView('downloads.quotation', [
-                    'code' => (new AppController())->getZeroedNumber($quotation->code),
-                    'date' => $now_d,
-                    'time' => $now_t,
                     'quotation' => $quotation,
-                    'total_in_words' => $total_in_words,
                 ]);
 
                 return $pdf->download("$filename.pdf");

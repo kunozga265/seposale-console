@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{"QUOTATION#".$quotation->formattedCode()." - ".$quotation->client->name}}</title>
+    <title>{{"INVOICE#".$invoice->formattedCode()." - ".$invoice->client->name}}</title>
 
     <style>
         * {
@@ -140,12 +140,6 @@
 
         .font-bold {
             font-weight: bold;
-        }
-
-        .shadow-xl {
-            --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);
-            --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
         }
 
         .container{
@@ -316,8 +310,8 @@
     </div>
 
     <div class="main-area-header">
-        <div style="float: right" class="date">{{date('F j, Y',$quotation->created_at->getTimestamp())}}</div>
-        <h4>Quotation: <span>#{{$quotation->formattedCode()}}</span></h4>
+        <div style="float: right" class="date">{{date('F j, Y',$invoice->sale->date)}}</div>
+        <h4>Invoice: <span>#{{$invoice->formattedCode()}}</span></h4>
     </div>
 
 
@@ -325,42 +319,42 @@
     <table class="details">
         <tr>
             <td class="b-0">Name:</td>
-            <td class="b-0">{{$quotation->client->name}}</td>
+            <td class="b-0">{{$invoice->client->name}}</td>
         </tr>
-        @if(isset($quotation->client->phone_number))
+        @if(isset($invoice->client->phone_number))
             <tr>
                 <td class="b-0">Phone Number:</td>
-                <td class="b-0">{{$quotation->client->phone_number}}</td>
+                <td class="b-0">{{$invoice->client->phone_number}}</td>
 
             </tr>
         @endif
-        @if(isset($quotation->client->email))
+        @if(isset($invoice->client->email))
             <tr>
                 <td class="b-0">Email:</td>
-                <td class="b-0" style="text-transform: lowercase">{{$quotation->client->email}}</td>
+                <td class="b-0" style="text-transform: lowercase">{{$invoice->client->email}}</td>
             </tr>
         @endif
-        @if(isset($quotation->client->address))
+        @if(isset($invoice->client->address))
             <tr>
                 <td class="b-0">Address:</td>
-                <td class="b-0">{{$quotation->client->address}}</td>
+                <td class="b-0">{{$invoice->client->address}}</td>
             </tr>
         @endif
         <tr>
             <td class="b-0">Site Location:</td>
-            <td class="b-0">{{$quotation->location}}</td>
+            <td class="b-0">{{$invoice->sale->location}}</td>
         </tr>
-        {{--            @if(isset($quotation->recipient_name))--}}
+        {{--            @if(isset($invoice->recipient_name))--}}
         {{--                <div class="row">--}}
 
         {{--                    <div class="col-12 col-md-3 md-show">Contact Name:</div>--}}
-        {{--                    <div class="col-12 col-md-9">{{$quotation->recipient_name}}</div>--}}
+        {{--                    <div class="col-12 col-md-9">{{$invoice->recipient_name}}</div>--}}
         {{--                </div>--}}
         {{--            @endif--}}
-        {{--            @if(isset($quotation->recipient_phone_number))--}}
+        {{--            @if(isset($invoice->recipient_phone_number))--}}
         {{--                <div class="row">--}}
         {{--                    <div class="col-12 col-md-3 md-show">Contact Number:</div>--}}
-        {{--                    <div class="col-12 col-md-9">{{$quotation->recipient_phone_number}}</div>--}}
+        {{--                    <div class="col-12 col-md-9">{{$invoice->recipient_phone_number}}</div>--}}
         {{--                </div>--}}
         {{--            @endif--}}
 
@@ -381,22 +375,22 @@
             </tr>
             </thead>
             <tbody>
-            @foreach(json_decode($quotation->information) as $info)
+            @foreach($invoice->sale->products as $productCompound)
                 <tr>
-                    <td style="text-transform: none">{{$info->details}}</td>
-                    <td style="text-align: center">{{$info->units ?? ""}}</td>
-                    <td style="text-align: center">{{number_format($info->quantity,2)}}</td>
-                    <td style="text-align: right">{{number_format($info->unitCost,2)}}</td>
-                    <td style="text-align: right">{{number_format($info->totalCost,2)}}</td>
+                    <td style="text-transform: none">{{$productCompound->description}}</td>
+                    <td style="text-align: center">{{$productCompound->units}}</td>
+                    <td style="text-align: center">{{number_format($productCompound->quantity,2)}}</td>
+                    <td style="text-align: right">{{number_format($productCompound->amount/$productCompound->quantity,2)}}</td>
+                    <td style="text-align: right">{{number_format($productCompound->amount,2)}}</td>
                 </tr>
             @endforeach
             <tr class="total">
                 <td colspan="4">Total</td>
-                <td>{{number_format($quotation->total,2)}}</td>
+                <td>{{number_format($invoice->sale->total,2)}}</td>
             </tr>
             <tr>
                 <td colspan="5" class="total-in-words">
-                    {{$quotation->totalInWords()}} Only
+                    {{$invoice->totalInWords()}} Only
                 </td>
             </tr>
             </tbody>
@@ -405,7 +399,7 @@
 
     <div class="signature mt-24">
         <div>Prepared By</div>
-        <div class="font-bold">{{$quotation->user->fullName()}}</div>
+        <div class="font-bold">{{$invoice->sale->user->fullName()}}</div>
     </div>
 
     <div class="account-details">

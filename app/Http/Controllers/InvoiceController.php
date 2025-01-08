@@ -12,96 +12,73 @@ use Rmunate\Utilities\SpellNumber;
 
 class InvoiceController extends Controller
 {
-    public function show(Request $request,$client_serial,$quotation_serial)
+    public function show(Request $request, $client_serial, $quotation_serial)
     {
-        //find out if the request is valid
-        $client=Client::where("serial",$client_serial)->first();
+        //find client model
+        $client = Client::where("serial", $client_serial)->first();
 
-        if(is_object($invoice)){
+        //check if client model exists
+        if (is_object($client)) {
 
-            /*
-                        $pdf=App::make('dompdf.wrapper');
-                        $pdf->loadHTML('request');
-                        return $pdf->stream('Request Form');*/
+            $invoice = $client->invoices()->where("serial", $quotation_serial)->first();
 
-            $filename="INVOICE#".(new AppController())->getZeroedNumber($invoice->code,$invoice->revision)." - ".$invoice->client->name."-".date('Ymd',$invoice->sale->date);
+            if (is_object($invoice)) {
 
-            $now_d=Carbon::createFromTimestamp($invoice->sale->date,'Africa/Lusaka')->format('F j, Y');
-            $now_t=Carbon::createFromTimestamp($invoice->sale->date,'Africa/Lusaka')->format('H:i');
+//                $now_d = Carbon::now('Africa/Lusaka')->format('F j, Y');
+//                $now_t = Carbon::now('Africa/Lusaka')->format('H:i');
 
-            $total_in_words = SpellNumber::value($invoice->sale->total)
-                ->locale('en')
-                ->currency('Kwacha')
-                ->fraction('Tambala')
-                ->toMoney();
+                $total_in_words = SpellNumber::value($invoice->sale->total)
+                    ->locale('en')
+                    ->currency('Kwacha')
+                    ->fraction('Tambala')
+                    ->toMoney();
 
-            $total_in_words = str_replace(" of "," ",$total_in_words);
+                str_replace($total_in_words, " and ", " of ");
 
-            $pdf = PDF::loadView('invoice', [
-                'code'              => (new AppController())->getZeroedNumber($invoice->code,$invoice->revision),
-                'date'              => $now_d,
-                'time'              => $now_t,
-                'invoice'           => $invoice,
-                'total_in_words'    => $total_in_words
-            ]);
-            return $pdf->download("$filename.pdf");
-
-        }else {
-            if ((new AppController())->isApi($request)) {
-                //API Response
-                return response()->json(['message' => "Invoice not found"], 404);
-            }else{
-
-
-                //Web Response
-                return Redirect::route('dashboard')->with('error','Invoice not found');
+                return view('pages.invoice', [
+//                    'code' => (new AppController())->getZeroedNumber($invoice->code),
+//                    'date' => $now_d,
+//                    'time' => $now_t,
+                    'invoice' => $invoice,
+                    'total_in_words' => $total_in_words,
+                ]);
+            } else {
+                return Redirect::route('home')->with('error', 'Invoice was not found');
             }
+
+        } else {
+            return Redirect::route('home')->with('error', 'Client profile does not exist');
         }
     }
-    public function print(Request $request,$id)
+
+    public function download(Request $request, $client_serial, $invoice_serial)
     {
-        //find out if the request is valid
-        $invoice=Invoice::find($id);
+        //find client model
+        $client = Client::where("serial", $client_serial)->first();
 
-        if(is_object($invoice)){
+        //check if client model exists
+        if (is_object($client)) {
 
-            /*
-                        $pdf=App::make('dompdf.wrapper');
-                        $pdf->loadHTML('request');
-                        return $pdf->stream('Request Form');*/
+            $invoice = $client->invoices()->where("serial", $invoice_serial)->first();
 
-            $filename="INVOICE#".(new AppController())->getZeroedNumber($invoice->code,$invoice->revision)." - ".$invoice->client->name."-".date('Ymd',$invoice->sale->date);
+            if (is_object($invoice)) {
 
-            $now_d=Carbon::createFromTimestamp($invoice->sale->date,'Africa/Lusaka')->format('F j, Y');
-            $now_t=Carbon::createFromTimestamp($invoice->sale->date,'Africa/Lusaka')->format('H:i');
+                $filename="INVOICE#".$invoice->formattedCode()." - ".$invoice->client->name."-".date('Ymd');
 
-            $total_in_words = SpellNumber::value($invoice->sale->total)
-                ->locale('en')
-                ->currency('Kwacha')
-                ->fraction('Tambala')
-                ->toMoney();
+                $pdf = PDF::loadView('downloads.invoice', [
+                    'invoice' => $invoice,
+                ]);
 
-            $total_in_words = str_replace(" of "," ",$total_in_words);
-
-            $pdf = PDF::loadView('invoice', [
-                'code'              => (new AppController())->getZeroedNumber($invoice->code,$invoice->revision),
-                'date'              => $now_d,
-                'time'              => $now_t,
-                'invoice'           => $invoice,
-                'total_in_words'    => $total_in_words
-            ]);
-            return $pdf->download("$filename.pdf");
-
-        }else {
-            if ((new AppController())->isApi($request)) {
-                //API Response
-                return response()->json(['message' => "Invoice not found"], 404);
-            }else{
+                return $pdf->download("$filename.pdf");
 
 
-                //Web Response
-                return Redirect::route('dashboard')->with('error','Invoice not found');
+            } else {
+                return Redirect::route('home')->with('error', 'Invoice was not found');
             }
+
+        } else {
+            return Redirect::route('home')->with('error', 'Client profile does not exist');
         }
     }
+
 }

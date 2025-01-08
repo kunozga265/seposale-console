@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AppController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,6 +37,15 @@ class Sale extends Model
         return $this->hasOne(Expense::class);
     }
 
+    public function formattedCode()
+    {
+        return (new AppController())->getZeroedNumber($this->code_alt);
+    }
+
+    public function totalInWords()
+    {
+        return (new AppController())->getAmountInWords($this->total);
+    }
 
     public function invoice()
     {
