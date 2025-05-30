@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        @if(isset($receipt->information))
+        <!-- @if(isset($receipt->information))
             <div id="products">
                 <p class="heading">Products and Services</p>
 
@@ -96,7 +96,52 @@
                     </div>
                 @endforeach
             </div>
-        @endif
+        @endif -->
+
+         @if(isset($receipt->summaries))
+    <div> <p class="heading" style="margin-bottom: 12px">Products and Services</p></div>
+
+        <table class="summary">
+            <thead>
+            <tr>
+                <th class="shade">Details</th>
+                <th class="shade" style="text-align: center">Units</th>
+                <th class="shade" style="text-align: center">Quantity</th>
+                <th class="shade" style="text-align: right">Unit Cost</th>
+                <th class="shade" style="text-align: right">Total Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($receipt->summaries as $info)
+                <tr>
+                    <td style="text-transform: none">{{$info->name}}</td>
+                    <td style="text-align: center">
+                        @if(isset($info->units))
+                            <span>{{$info->units}}</span>
+                        @else
+                            <span>-</span>
+                        @endif
+                    </td>
+                    <td style="text-align: center">
+                        @if(isset($info->cost))
+                            <span>{{number_format($info->amount/$info->cost,2)}}</span>
+                        @else
+                            <span>-</span>
+                        @endif
+                    </td>
+                    <td style="text-align: right">
+                        @if(isset($info->cost))
+                            <span>{{number_format($info->cost,2)}}</span>
+                        @else
+                            <span>-</span>
+                        @endif
+                    </td>
+                    <td style="text-align: right">{{number_format($info->amount,2)}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endif
 
         <div class="mt-48 signature text-center">
             <div>Amount Received:</div>

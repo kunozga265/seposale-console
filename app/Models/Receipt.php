@@ -47,6 +47,11 @@ class Receipt extends Model
         return (new AppController())->getAmountInWords($this->amount);
     }
 
+     public function summaries()
+    {
+        return $this->hasMany(ReceiptSummary::class);
+    }
+
     protected $fillable=[
         "client_id",
         "sale_id",
