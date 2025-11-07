@@ -33,7 +33,7 @@ class InvoiceController extends Controller
                     ->fraction('Tambala')
                     ->toMoney();
 
-                str_replace($total_in_words, " and ", " of ");
+                 $total_in_words = str_replace(" of ", " ", $total_in_words);
 
                 return view('pages.invoice', [
 //                    'code' => (new AppController())->getZeroedNumber($invoice->code),

@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\CreditVoucherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class,'home'])->name('home');
@@ -32,8 +33,12 @@ Route::get('/{client_serial}/sales/{sale_serial}/download', [SaleController::cla
 
 /* Deliveries */
 Route::get('/{client_serial}/deliveries/{delivery_serial}', [DeliveryController::class,'show'])->name('deliveries.show');
-Route::post('/{client_serial}/deliveries/{delivery_serial}/download', [DeliveryController::class,'download'])->name('deliveries.download');
+Route::get('/{client_serial}/deliveries/{delivery_serial}/download', [DeliveryController::class,'download'])->name('deliveries.download');
 
-/* Deliveries */
+/* Collections */
 Route::get('/{client_serial}/collections/{collection_serial}', [CollectionController::class,'show'])->name('collections.show');
-Route::post('/{client_serial}/collections/{collection_serial}/download', [CollectionController::class,'download'])->name('collections.download');
+Route::get('/{client_serial}/collections/{collection_serial}/download', [CollectionController::class,'download'])->name('collections.download');
+
+/* Credit Vouchers */
+Route::get('/{serial}/credit-vouchers/{credit_voucher_serial}', [CreditVoucherController::class,'show'])->name('credit-vouchers.show');
+Route::get('/{serial}/credit-vouchers/{credit_voucher_serial}/download', [CreditVoucherController::class,'download'])->name('credit-vouchers.download');
