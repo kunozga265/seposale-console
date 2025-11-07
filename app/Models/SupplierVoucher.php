@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\AppController;
 
-class CreditVoucher extends Model
+class SupplierVoucher extends Model
 {
     use HasFactory;
 
-    public function __get($name)
+     public function __get($name)
     {
         if ($name === 'contact') {
             if ($this->transporter != null) {
@@ -19,7 +19,7 @@ class CreditVoucher extends Model
                 return $this->supplier;
             }
         } else  if ($name === 'details') {
-            return $this->requestFormItem->product_name;
+            return $this->requestFormItem->details;
         } else  if ($name === 'type') {
             if ($this->transporter != null) {
                 return "delivery";
@@ -59,10 +59,7 @@ class CreditVoucher extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
-    public function delivery()
-    {
-        return $this->belongsTo(Delivery::class);
-    }
+
     public function payable()
     {
         return $this->belongsTo(Payable::class);
@@ -73,9 +70,9 @@ class CreditVoucher extends Model
         return (new AppController())->getZeroedNumber($this->code);
     }
 
-    public function sale()
+    public function site()
     {
-        return $this->belongsTo(Sale::class);
+        return $this->belongsTo(Site::class);
     }
     public function getName()
     {
@@ -104,8 +101,7 @@ class CreditVoucher extends Model
         "payable_id",
         "transporter_id",
         "supplier_id",
-        "delivery_id",
-        "sale_id",
+        "site_id",
         "paid",
         "request_id",
         "request_form_item",

@@ -9,10 +9,10 @@ class Position extends Model
 {
     use HasFactory;
 
-    public function grade()
-    {
-        return $this->belongsTo(Grade::class);
-    }
+    // public function grade()
+    // {
+    //     return $this->belongsTo(Grade::class);
+    // }
 
     public function users()
     {

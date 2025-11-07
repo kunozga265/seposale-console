@@ -8,6 +8,7 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\CreditVoucherController;
+use App\Http\Controllers\SupplierVoucherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class,'home'])->name('home');
@@ -42,3 +43,7 @@ Route::get('/{client_serial}/collections/{collection_serial}/download', [Collect
 /* Credit Vouchers */
 Route::get('/{serial}/credit-vouchers/{credit_voucher_serial}', [CreditVoucherController::class,'show'])->name('credit-vouchers.show');
 Route::get('/{serial}/credit-vouchers/{credit_voucher_serial}/download', [CreditVoucherController::class,'download'])->name('credit-vouchers.download');
+
+/* Supplier Vouchers */
+Route::get('/{serial}/supplier-vouchers/{supplier_voucher_serial}', [SupplierVoucherController::class,'show'])->name('supplier-vouchers.show');
+Route::get('/{serial}/supplier-vouchers/{supplier_voucher_serial}/download', [SupplierVoucherController::class,'download'])->name('supplier-vouchers.download');

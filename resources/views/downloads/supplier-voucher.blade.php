@@ -6,7 +6,7 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{"INVOICE#" . $credit_voucher->formattedCode() . " - " . $credit_voucher->contact->name}}</title>
+    <title>{{"INVOICE#" . $supplier_voucher->formattedCode() . " - " . $supplier_voucher->contact->name}}</title>
 
     <style>
         * {
@@ -323,10 +323,8 @@
         </div>
 
         <div class="main-area-header">
-            <div style="float: right" class="date">{{date('F j, Y', $credit_voucher->date)}}</div>
-            <h4>Credit Voucher: <span>#{{$credit_voucher->formattedCode()}}</span></h4>
-            <div>Delivery:
-                #{{$credit_voucher->delivery->formattedCode()}}</div>
+            <div style="float: right" class="date">{{date('F j, Y', $supplier_voucher->date)}}</div>
+            <h4>Supplier Voucher: <span>#{{$supplier_voucher->formattedCode()}}</span></h4>
         </div>
 
 
@@ -334,48 +332,48 @@
         <table class="details">
             <tr>
                 <td class="b-0">Name:</td>
-                <td class="b-0">{{$credit_voucher->contact->name}}</td>
+                <td class="b-0">{{$supplier_voucher->contact->name}}</td>
             </tr>
-            @if($credit_voucher->contact->phone_number != null)
+            @if($supplier_voucher->contact->phone_number != null)
                 <tr>
                     <td class="b-0">Phone Number:</td>
-                    <td class="b-0">{{$credit_voucher->contact->phone_number}}</td>
+                    <td class="b-0">{{$supplier_voucher->contact->phone_number}}</td>
 
                 </tr>
             @endif
-            @if($credit_voucher->contact->email != null)
+            @if($supplier_voucher->contact->email != null)
                 <tr>
                     <td class="b-0">Email:</td>
-                    <td class="b-0" style="text-transform: lowercase">{{$credit_voucher->contact->email}}</td>
+                    <td class="b-0" style="text-transform: lowercase">{{$supplier_voucher->contact->email}}</td>
                 </tr>
             @endif
-            @if($credit_voucher->contact->address != null)
+            @if($supplier_voucher->contact->address != null)
                 <tr>
                     <td class="b-0">Address:</td>
-                    <td class="b-0">{{$credit_voucher->contact->address}}</td>
+                    <td class="b-0">{{$supplier_voucher->contact->address}}</td>
                 </tr>
             @endif
-            @if($credit_voucher->contact->location != null)
+            @if($supplier_voucher->contact->location != null)
                 <tr>
                     <td class="b-0">Rank Location:</td>
-                    <td class="b-0">{{$credit_voucher->contact->location}}</td>
+                    <td class="b-0">{{$supplier_voucher->contact->location}}</td>
                 </tr>
             @endif
             <tr>
-                <td class="b-0">Site Location:</td>
-                <td class="b-0">{{$credit_voucher->sale?->location}}</td>
+                <td class="b-0">Site:</td>
+                <td class="b-0">{{$supplier_voucher->site?->name}}</td>
             </tr>
-            {{-- @if(isset($credit_voucher->recipient_name))--}}
+            {{-- @if(isset($supplier_voucher->recipient_name))--}}
             {{-- <div class="row">--}}
 
                 {{-- <div class="col-12 col-md-3 md-show">Contact Name:</div>--}}
-                {{-- <div class="col-12 col-md-9">{{$credit_voucher->recipient_name}}</div>--}}
+                {{-- <div class="col-12 col-md-9">{{$supplier_voucher->recipient_name}}</div>--}}
                 {{-- </div>--}}
             {{-- @endif--}}
-            {{-- @if(isset($credit_voucher->recipient_phone_number))--}}
+            {{-- @if(isset($supplier_voucher->recipient_phone_number))--}}
             {{-- <div class="row">--}}
                 {{-- <div class="col-12 col-md-3 md-show">Contact Number:</div>--}}
-                {{-- <div class="col-12 col-md-9">{{$credit_voucher->recipient_phone_number}}</div>--}}
+                {{-- <div class="col-12 col-md-9">{{$supplier_voucher->recipient_phone_number}}</div>--}}
                 {{-- </div>--}}
             {{-- @endif--}}
 
@@ -394,12 +392,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-transform: none">{{$credit_voucher->requestFormItem->product_name}}</td>
-                        <td style="text-align: right">{{number_format($credit_voucher->amount, 2)}}</td>
+                        <td style="text-transform: none">{{$supplier_voucher->details}}</td>
+                        <td style="text-align: right">{{number_format($supplier_voucher->amount, 2)}}</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="total-in-words">
-                            {{$credit_voucher->totalInWords()}} Only
+                            {{$supplier_voucher->totalInWords()}} Only
                         </td>
                     </tr>
                 </tbody>
